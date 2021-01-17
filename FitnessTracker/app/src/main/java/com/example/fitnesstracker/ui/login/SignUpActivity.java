@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.fitnesstracker.MainActivity;
 import com.example.fitnesstracker.R;
+import com.example.fitnesstracker.ui.userdetails.UserDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -50,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
         signInTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(SignUpActivity.this, SignInActivity.class);
+                Intent intent= new Intent(SignUpActivity.this, UserDetails.class);
                 startActivity(intent);
                 finish();
             }

@@ -22,6 +22,28 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp">
         <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter your Username"
+            android:paddingVertical="15dp"
+            android:textColor="#070707"
+            android:inputType="text"
+            android:paddingLeft="60dp"
+            android:background="@drawable/rectangular_field"/>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/ic_name"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+        <EditText
         android:id="@+id/weight"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -111,23 +133,11 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_marginBottom="40dp">
-    <Button
-        android:id="@+id/skip"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:background="#E8E9EC"
-        android:text="Skip"
-        android:textColor="#ffffff"
-        android:textSize="25dp"
-        android:textAllCaps="false"
-        android:layout_marginBottom="20dp"/>
 
         <Button
             android:id="@+id/next"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:background="#E8E9EC"

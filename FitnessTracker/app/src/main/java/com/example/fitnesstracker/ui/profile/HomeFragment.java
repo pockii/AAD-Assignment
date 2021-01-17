@@ -1,4 +1,4 @@
-package com.example.fitnesstracker.ui.home;
+package com.example.fitnesstracker.ui.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,10 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.fitnesstracker.MainActivity;
 import com.example.fitnesstracker.R;
 import com.example.fitnesstracker.ui.login.SignInActivity;
-import com.example.fitnesstracker.ui.login.SignUpActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeFragment extends Fragment {

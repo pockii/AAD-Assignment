@@ -1,6 +1,4 @@
-package com.example.fitnesstracker.ui.home;
-
-import android.widget.Button;
+package com.example.fitnesstracker.ui.profile;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
