@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fitnesstracker.MainActivity;
 import com.example.fitnesstracker.R;
 import com.example.fitnesstracker.ui.userdetails.UserDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -75,7 +76,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(SignInActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignInActivity.this,"Successfully Logged In",Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(SignInActivity.this, UserDetails.class);
                     startActivity(intent);
                     finish();
