@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="30dp"
-    android:background="#C56969">
+    android:background="#FFFFFF">
 
     <TextView
         android:layout_width="wrap_content"
@@ -127,24 +127,14 @@
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
-    <LinearLayout
+    <Button
+        android:id="@+id/submitDetails"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="40dp">
-
-        <Button
-            android:id="@+id/submitDetails"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
-            android:background="#E8E9EC"
-            android:text="Submit"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="25dp" />
-
-</LinearLayout>
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="25dp" />
 </LinearLayout>

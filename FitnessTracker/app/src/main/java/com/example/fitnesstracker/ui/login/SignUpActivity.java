@@ -16,11 +16,13 @@ import android.widget.Toast;
 
 import com.example.fitnesstracker.MainActivity;
 import com.example.fitnesstracker.R;
-import com.example.fitnesstracker.ui.userdetails.UserDetails;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText, confirmEditText;
@@ -28,11 +30,12 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView signInTextView;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup);
+        setContentView(R.layout.activity_signup);
         firebaseAuth = FirebaseAuth.getInstance();
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
@@ -40,6 +43,19 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.register);
         signInTextView = findViewById(R.id.signintv);
         progressDialog = new ProgressDialog(this);
+
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user!=null){
+                    Intent intent=new Intent(SignUpActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
+            }
+        };
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
         signInTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(SignUpActivity.this, UserDetails.class);
+                Intent intent= new Intent(SignUpActivity.this, SignInActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -92,14 +108,13 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(SignUpActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
-                    Intent intent=new Intent(SignUpActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                if(!task.isSuccessful()){
+                    Toast.makeText(SignUpActivity.this,"Sign Up Failed",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(SignUpActivity.this,"Sign Up Failed",Toast.LENGTH_LONG).show();
+                    String user_id = firebaseAuth.getCurrentUser().getUid();
+                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
+                    current_user_db.setValue(true);
                 }
             }
         });
@@ -108,4 +123,15 @@ public class SignUpActivity extends AppCompatActivity {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(firebaseAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        firebaseAuth.removeAuthStateListener(firebaseAuthListener);
+    }
 }
