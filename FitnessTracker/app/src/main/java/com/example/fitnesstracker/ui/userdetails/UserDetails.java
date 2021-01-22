@@ -2,7 +2,6 @@ package com.example.fitnesstracker.ui.userdetails;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +11,7 @@ import android.widget.EditText;
 
 import com.example.fitnesstracker.MainActivity;
 import com.example.fitnesstracker.R;
-import com.example.fitnesstracker.ui.login.SignInActivity;
-import com.example.fitnesstracker.ui.login.SignUpActivity;
-import com.example.fitnesstracker.ui.profile.HomeFragment;
+import com.example.fitnesstracker.ui.profile.NumberPickerDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -128,4 +125,5 @@ public class UserDetails extends AppCompatActivity {
 
         finish();
     }
+
 }
