@@ -28,8 +28,8 @@
                 android:layout_margin="9dp"
                 android:adjustViewBounds="true"
                 android:background="@drawable/circle"
-                android:padding="3dp"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                android:src="@mipmap/ic_default_user"/>
 
         </RelativeLayout>
 
@@ -60,7 +60,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="25sp"
-                android:layout_marginEnd="20dp"/>
+                android:layout_marginEnd="5dp"/>
             <TextView
                 android:id="@+id/displayAge"
                 android:layout_width="wrap_content"
@@ -102,10 +102,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/selectHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="Select Height"
+                    android:onClick="showNumberPicker"
                     android:textColor="@color/white"
                     android:textSize="25sp" />
 
@@ -140,6 +142,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/selectWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"

@@ -1,6 +1,7 @@
 package com.example.fitnesstracker.ui.profile;
 
 import android.content.Intent;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,19 +30,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
     private ImageView profilePic;
     private TextView profileName, profileAge, profileGender, profileWeight, profileHeight,
-            profileBmi;
+            profileBmi, selectWeightPicker, selectHeightPicker;
+
 
     //Firebase
     private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference myRef;
+    private DatabaseReference firebaseReference;
     private String userID;
+
 
 
     private HomeViewModel homeViewModel;
@@ -66,26 +71,34 @@ public class HomeFragment extends Fragment {
         profileWeight = getActivity().findViewById(R.id.displayWeight);
         profileHeight = getActivity().findViewById(R.id.displayHeight);
         profileBmi = getActivity().findViewById(R.id.displayBmi);
+        //initialize height and weight select
+        selectHeightPicker = getActivity().findViewById(R.id.selectHeight);
+        selectWeightPicker = getActivity().findViewById(R.id.selectWeight);
+
 
         profilePic = getActivity().findViewById(R.id.uploadImage);
 
         //Declare firebase Variables
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = firebaseDatabase.getReference();
+        //not used variable FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         userID = user.getUid();
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
-        myRef.addValueEventListener(new ValueEventListener() {
+        //Getting Data from Firebase
+        firebaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
+        firebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("name").getValue().toString();
                 String gender = dataSnapshot.child("gender").getValue().toString();
                 String age = dataSnapshot.child("age").getValue().toString();
+                String weight = dataSnapshot.child("weight").getValue().toString();
+                String height = dataSnapshot.child("height").getValue().toString();
                 profileName.setText(name);
                 profileAge.setText(age);
-                profileGender.setText(gender);
+                profileGender.setText(gender + ",");
+                profileWeight.setText(weight + "KG");
+                profileHeight.setText(height + "CM");
                }
 
 
@@ -95,7 +108,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
-    }
+        //Take Photo With Camera and upload to firebase
+
+        }
 
 
-    }
+}
+

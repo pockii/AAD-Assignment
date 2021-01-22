@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import com.example.fitnesstracker.ui.login.SignInActivity;
+import com.example.fitnesstracker.ui.profile.NumberPickerDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -18,7 +22,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
 
 
     @Override
@@ -34,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
 
 
     }
@@ -53,5 +56,18 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, SignInActivity.class);
         startActivity(intent);
         return true;
+    }
+
+    @Override
+    public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
+        Toast.makeText(this,
+                "selected number " + numberPicker.getValue(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void showNumberPicker(View view){
+        NumberPickerDialog newFragment = new NumberPickerDialog();
+        newFragment.setValueChangeListener(this);
+        newFragment.show(getSupportFragmentManager(), "time picker");
+
     }
 }

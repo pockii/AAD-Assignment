@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -33,6 +34,7 @@ public class SignInActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class SignInActivity extends AppCompatActivity {
         signUpTextView = findViewById(R.id.signuptv);
         progressDialog = new ProgressDialog(this);
 
+
+
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -58,7 +62,6 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
         };
-
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,12 +99,12 @@ public class SignInActivity extends AppCompatActivity {
                     Toast.makeText(SignInActivity.this, "Sign In Failed", Toast.LENGTH_LONG).show();
                 } else {
                     String user_id = firebaseAuth.getCurrentUser().getUid();
-                    DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
-                    current_user_db.setValue(true);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
                 }
                 progressDialog.dismiss();
             }
         });
+
 
     }
 
