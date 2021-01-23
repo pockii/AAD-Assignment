@@ -24,4 +24,11 @@
     <string name="enter_your_weight">Enter your weight</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Alert dialog for camera or gallery -->
+    <string name="dialog_image_options">Select Image Option</string>
+
+    <string-array name="image_options">
+        <item>Choose photo from gallery</item>
+        <item>Take picture with camera</item>
+    </string-array>
 </resources>
