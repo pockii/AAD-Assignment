@@ -11,24 +11,33 @@ import android.widget.Toast;
 
 import com.example.fitnesstracker.ui.login.SignInActivity;
 import com.example.fitnesstracker.ui.profile.NumberPickerDialog;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
+    private DatabaseReference userDatabase;
+    private FirebaseAuth firebaseAuth;
+    private String userID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -39,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        userID = firebaseAuth.getCurrentUser().getUid();
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
 
     }
 
@@ -67,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
     public void showNumberPicker(View view){
         NumberPickerDialog newFragment = new NumberPickerDialog();
         newFragment.setValueChangeListener(this);
-        newFragment.show(getSupportFragmentManager(), "time picker");
+        newFragment.show(getSupportFragmentManager(), "selected number");
 
     }
 }

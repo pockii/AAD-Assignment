@@ -14,18 +14,33 @@ import android.view.ViewGroup;
 import android.widget.NumberPicker;
 
 import com.example.fitnesstracker.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NumberPickerDialog extends DialogFragment {
 
     private NumberPicker.OnValueChangeListener valueChangeListener;
+    private DatabaseReference userDatabase;
+    private FirebaseAuth firebaseAuth;
+    private String userID;
+    private int userHeight;
+    private String userWeight;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        userID = firebaseAuth.getCurrentUser().getUid();
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
+
         final NumberPicker numberPicker = new NumberPicker(getActivity());
 
-        numberPicker.setMinValue(20);
-        numberPicker.setMaxValue(60);
+        numberPicker.setMinValue(40);
+        numberPicker.setMaxValue(200);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Choose Value");
@@ -36,6 +51,11 @@ public class NumberPickerDialog extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 valueChangeListener.onValueChange(numberPicker,
                         numberPicker.getValue(), numberPicker.getValue());
+                userHeight = numberPicker.getValue();
+                Map userInfo = new HashMap();
+                userInfo.put("height", userHeight);
+                userDatabase.updateChildren(userInfo);
+
             }
         });
 

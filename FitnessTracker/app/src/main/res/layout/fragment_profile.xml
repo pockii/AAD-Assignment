@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.profile.HomeFragment">
+    tools:context=".ui.profile.ProfileFragment">
 
     <RelativeLayout
         android:id="@+id/rellay1"
@@ -109,7 +109,8 @@
                     android:text="Select Height"
                     android:onClick="showNumberPicker"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"
+                    tools:ignore="OnClick" />
 
                 <TextView
                     android:id="@+id/displayHeight"
