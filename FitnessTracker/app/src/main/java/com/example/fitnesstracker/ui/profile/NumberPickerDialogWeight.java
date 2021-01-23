@@ -4,16 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.NumberPicker;
 
-import com.example.fitnesstracker.R;
+import androidx.fragment.app.DialogFragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,13 +15,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NumberPickerDialog extends DialogFragment {
+public class NumberPickerDialogWeight extends DialogFragment {
 
     private NumberPicker.OnValueChangeListener valueChangeListener;
     private DatabaseReference userDatabase;
     private FirebaseAuth firebaseAuth;
     private String userID;
-    private int userHeight;
     private int userWeight;
 
     @Override
@@ -51,9 +44,9 @@ public class NumberPickerDialog extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 valueChangeListener.onValueChange(numberPicker,
                         numberPicker.getValue(), numberPicker.getValue());
-                userHeight = numberPicker.getValue();
+                userWeight = numberPicker.getValue();
                 Map userInfo = new HashMap();
-                userInfo.put("height", userHeight);
+                userInfo.put("weight", userWeight);
                 userDatabase.updateChildren(userInfo);
 
             }

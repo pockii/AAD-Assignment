@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.fitnesstracker.ui.login.SignInActivity;
 import com.example.fitnesstracker.ui.profile.NumberPickerDialog;
+import com.example.fitnesstracker.ui.profile.NumberPickerDialogWeight;
+import com.example.fitnesstracker.ui.profile.ProfileFragment;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -80,6 +82,12 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
 
     public void showNumberPicker(View view){
         NumberPickerDialog newFragment = new NumberPickerDialog();
+        newFragment.setValueChangeListener(this);
+        newFragment.show(getSupportFragmentManager(), "selected number");
+
+    }
+    public void showNumberPickerWeight(View view){
+        NumberPickerDialogWeight newFragment = new NumberPickerDialogWeight();
         newFragment.setValueChangeListener(this);
         newFragment.show(getSupportFragmentManager(), "selected number");
 
