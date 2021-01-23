@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileFragment extends Fragment{
     private ImageView profilePic;
     private TextView profileName, profileAge, profileGender, profileWeight, profileHeight,
-            profileBmi, selectWeightPicker, selectHeightPicker;
+            profileBmi;
 
 
     //Firebase
@@ -56,9 +56,6 @@ public class ProfileFragment extends Fragment{
         profileWeight = getActivity().findViewById(R.id.displayWeight);
         profileHeight = getActivity().findViewById(R.id.displayHeight);
         profileBmi = getActivity().findViewById(R.id.displayBmi);
-        //initialize height and weight select
-        selectHeightPicker = getActivity().findViewById(R.id.selectHeight);
-        selectWeightPicker = getActivity().findViewById(R.id.selectWeight);
 
 
         profilePic = getActivity().findViewById(R.id.uploadImage);
@@ -92,6 +89,7 @@ public class ProfileFragment extends Fragment{
 
             }
         });
+
 
         //Take Photo With Camera and upload to firebase
 
