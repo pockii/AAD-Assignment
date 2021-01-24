@@ -112,6 +112,14 @@
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     tools:ignore="OnClick" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="CM"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"/>
 
             </LinearLayout>
 
@@ -145,6 +153,14 @@
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     tools:ignore="OnClick" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="KG"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"/>
 
             </LinearLayout>
 
@@ -211,9 +227,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Underweight < 18"
                     android:textColor="@color/white"
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:text="Underweight >18"/>
 
             </LinearLayout>
 
@@ -322,7 +338,7 @@
 
     </LinearLayout>
     <Button
-        android:id="@+id/calculateBMI"
+        android:id="@+id/calculateBmi"
         android:layout_width="match_parent"
         android:layout_below="@id/resultsLayOut2"
         android:layout_height="50dp"

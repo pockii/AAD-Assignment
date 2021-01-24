@@ -1,5 +1,6 @@
 package com.example.fitnesstracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -92,4 +93,5 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         newFragment.show(getSupportFragmentManager(), "selected number");
 
     }
+
 }
