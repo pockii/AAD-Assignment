@@ -32,7 +32,10 @@
     <string name="spd_in_mph" translatable="false">Spd in mph</string>
     <string name="spd_in_km_h" translatable="false">Spd in km/h</string>
 
-
+    <string-array name="Select_Gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 
 
 
