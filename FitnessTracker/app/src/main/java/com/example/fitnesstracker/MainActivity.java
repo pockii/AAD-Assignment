@@ -1,12 +1,10 @@
 package com.example.fitnesstracker;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
@@ -14,9 +12,6 @@ import com.example.fitnesstracker.ui.login.SignInActivity;
 import com.example.fitnesstracker.ui.profile.NumberPickerDialog;
 import com.example.fitnesstracker.ui.profile.NumberPickerDialogWeight;
 import com.example.fitnesstracker.ui.profile.ProfileFragment;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -24,17 +19,16 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
+public class MainActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener{
     private DatabaseReference userDatabase;
     private FirebaseAuth firebaseAuth;
     private String userID;
-
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +39,11 @@ public class MainActivity extends AppCompatActivity implements NumberPicker.OnVa
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_profile, R.id.navigation_activity, R.id.navigation_history)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
 
 
         firebaseAuth = FirebaseAuth.getInstance();

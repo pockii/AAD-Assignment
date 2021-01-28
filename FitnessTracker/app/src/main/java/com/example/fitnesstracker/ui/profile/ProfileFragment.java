@@ -19,7 +19,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.fitnesstracker.MainActivity;
 import com.example.fitnesstracker.R;
@@ -35,6 +37,10 @@ import com.google.firebase.database.ValueEventListener;
 import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
+
+    //Profile VM
+    ProfileViewModel profileViewModel;
+
     //Request code for gallery
     private static final int GALLERY_REQUEST = 9;
     //Request code for camera
@@ -51,16 +57,18 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference firebaseReference;
     private String userID;
-    private ProfileViewModel profileViewModel;
-
-    public ProfileFragment() {
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        final TextView profileName = view.findViewById(R.id.displayName);
+        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        profileViewModel.getName().observe(getActivity(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                profileName.setText(String.valueOf(s));
+            }
+        });
         return view;
     }
 
@@ -71,9 +79,9 @@ public class ProfileFragment extends Fragment {
         profileName = getActivity().findViewById(R.id.displayName);
         profileAge = getActivity().findViewById(R.id.displayAge);
         profileGender = getActivity().findViewById(R.id.displayGender);
-
         profileWeight = getActivity().findViewById(R.id.displayWeight);
         profileHeight = getActivity().findViewById(R.id.displayHeight);
+
         profileBmi = getActivity().findViewById(R.id.displayBmi);//Answer
         calculateBmi = getActivity().findViewById(R.id.calculateBmi);//Calculate bmi
 
@@ -139,11 +147,13 @@ public class ProfileFragment extends Fragment {
         intent.setType("image/*");
         startActivityForResult(intent, GALLERY_REQUEST);
     }
+
     private void capturePictureFromCamera(){
         Intent cameraIntent = new Intent();
         cameraIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(cameraIntent, CAMERA_REQUEST);
     }
+
     private void showImageOptionDialog(){
         final String[] options = getResources().getStringArray(R.array.image_options);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

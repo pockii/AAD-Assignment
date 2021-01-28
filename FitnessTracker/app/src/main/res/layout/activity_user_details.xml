@@ -109,7 +109,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp">
-        <EditText
+        <Spinner
+            android:entries="@array/Select_Gender"
+            android:spinnerMode="dropdown"
             android:id="@+id/gender"
             android:layout_width="match_parent"
             android:layout_height="50dp"

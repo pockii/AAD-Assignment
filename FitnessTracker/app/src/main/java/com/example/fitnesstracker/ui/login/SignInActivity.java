@@ -49,7 +49,6 @@ public class SignInActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
 
-
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
